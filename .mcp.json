@@ -1,0 +1,10 @@
+{
+	"mcpServers": {
+		"react-docs": {
+			"type": "stdio",
+			"command": "node",
+			"args": ["${CURSOR_PLUGIN_ROOT}/dist/server.mjs"],
+			"cwd": "${CURSOR_PLUGIN_ROOT}"
+		}
+	}
+}

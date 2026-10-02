@@ -1,0 +1,35 @@
+{
+  "name": "cursor-react",
+  "version": "0.1.0",
+  "private": false,
+  "description": "Cursor plugin for React: local docs MCP server (react.dev, Zustand, TanStack Query), lint tool, and skills.",
+  "type": "module",
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "sync-docs": "node scripts/sync-docs.mjs",
+    "build": "node scripts/build.mjs",
+    "start": "node dist/server.mjs",
+    "dev": "node mcp/server.mjs",
+    "smoke": "node dist/smoke-test.mjs",
+    "test": "pnpm build && node dist/smoke-test.mjs"
+  },
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.31.0",
+    "eslint": "^10.11.0",
+    "eslint-plugin-react-hooks": "^7.1.1",
+    "typescript": "^6.0.3",
+    "typescript-eslint": "^8.71.0",
+    "zod": "^4.6.5"
+  },
+  "devDependencies": {
+    "esbuild": "^0.28.2"
+  },
+  "license": "MIT",
+  "author": "thisVioletHydra",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/thisVioletHydra/cursor-react.git"
+  }
+}

@@ -1,0 +1,12 @@
+{
+	"name": "react",
+	"description": "A plugin for React development: local react.dev, Zustand and TanStack Query docs over MCP, a React hooks/Compiler linter, and React 19 skills.",
+	"version": "0.1.0",
+	"author": {
+		"name": "thisVioletHydra"
+	},
+	"repository": "https://github.com/thisVioletHydra/cursor-react",
+	"license": "MIT",
+	"keywords": ["react", "react19", "react-compiler", "zustand", "tanstack-query", "mcp", "eslint"],
+	"mcpServers": "./.mcp.json"
+}

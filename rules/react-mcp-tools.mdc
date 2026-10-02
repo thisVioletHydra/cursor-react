@@ -1,0 +1,28 @@
+---
+description: Instructions for using the react-docs MCP server tools for React, Zustand and TanStack Query documentation lookup and React code linting
+alwaysApply: true
+---
+
+You are able to use the react-docs MCP server, which has a locally synced copy of the react.dev docs (React 19, React Compiler, RSC), the Zustand docs and the TanStack Query (React) docs. Here's how to use the available tools effectively:
+
+## Available react-docs MCP Tools:
+
+### 1. search-docs
+
+Use this FIRST for any React / Zustand / TanStack Query question. Full-text search ranked by title/heading matches; returns section ids, URLs and short snippets.
+Mention the library in the query (e.g. "zustand persist", "tanstack optimistic updates") or pass `source` to narrow results.
+
+### 2. list-sections
+
+Lists pages and their section anchors, optionally filtered by `source` (react | zustand | tanstack-query) and `prefix` (e.g. "reference/react", "guides").
+Use it to browse an area of the docs when search terms are unclear.
+
+### 3. get-documentation
+
+Retrieves the full text of sections by id (e.g. `react/reference/react/useOptimistic#usage`) or whole pages (id without `#anchor`).
+After searching, you MUST fetch ALL sections relevant to the user's task before answering or writing code. Prefer the docs over memory: React 19 APIs (Actions, `useActionState`, `useOptimistic`, `use`, `useEffectEvent`, `<Activity>`) changed recently.
+
+### 4. lint-component
+
+Lints React JS/TS/JSX/TSX with eslint-plugin-react-hooks (rules-of-hooks, exhaustive-deps and the React Compiler rules).
+You MUST call it on every component or hook you write before sending it to the user, and keep fixing until it reports no issues.
