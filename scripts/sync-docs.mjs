@@ -8,7 +8,7 @@ import { fileURLToPath } from 'node:url';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const CACHE = path.join(ROOT, '.cache');
-const OUT = path.join(ROOT, 'data', 'docs.json');
+const OUT = path.join(ROOT, 'plugins', 'cursor-react', 'data', 'docs.json');
 
 export const SOURCES = [
   {

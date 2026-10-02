@@ -7,7 +7,8 @@ import { fileURLToPath } from 'node:url';
 import { build } from 'esbuild';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
-const DIST = path.join(ROOT, 'dist');
+const OUT = 'plugins/cursor-react/dist'; // shipped inside the plugin folder
+const DIST = path.join(ROOT, OUT);
 fs.rmSync(DIST, { recursive: true, force: true });
 
 // Bundled CJS deps (eslint, typescript) call require()/__dirname; provide them in ESM.
@@ -40,8 +41,8 @@ const common = {
 
 const results = [
   // server + lazily-loaded lint chunk (eslint, react-hooks plugin, typescript-eslint parser)
-  await build({ ...common, entryPoints: { server: 'mcp/server.mjs' }, outdir: 'dist', splitting: true, chunkNames: 'chunks/[name]-[hash]', outExtension: { '.js': '.mjs' } }),
-  await build({ ...common, entryPoints: { 'smoke-test': 'scripts/smoke-test.mjs' }, outdir: 'dist', outExtension: { '.js': '.mjs' } }),
+  await build({ ...common, entryPoints: { server: 'mcp/server.mjs' }, outdir: OUT, splitting: true, chunkNames: 'chunks/[name]-[hash]', outExtension: { '.js': '.mjs' } }),
+  await build({ ...common, entryPoints: { 'smoke-test': 'scripts/smoke-test.mjs' }, outdir: OUT, outExtension: { '.js': '.mjs' } }),
 ];
 
 for (const r of results) for (const [file, info] of Object.entries(r.metafile.outputs)) console.log(`${file.padEnd(40)} ${(info.bytes / 1024).toFixed(0).padStart(7)} KB`);

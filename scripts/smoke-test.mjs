@@ -6,9 +6,10 @@ import { fileURLToPath } from 'node:url';
 import { Client } from '@modelcontextprotocol/sdk/client/index.js';
 import { StdioClientTransport } from '@modelcontextprotocol/sdk/client/stdio.js';
 
-// Plugin root: --root <dir> or the folder above this file (works for scripts/ and dist/).
+// Plugin root: --root <dir>, else the folder above this file if it holds mcp.json (bundled dist/), else plugins/cursor-react.
 const argRoot = process.argv.indexOf('--root');
-const ROOT = argRoot > 0 ? path.resolve(process.argv[argRoot + 1]) : path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
+const up = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
+const ROOT = argRoot > 0 ? path.resolve(process.argv[argRoot + 1]) : fs.existsSync(path.join(up, 'mcp.json')) ? up : path.join(up, 'plugins', 'cursor-react');
 let failures = 0;
 const check = (cond, msg) => { console.log(`${cond ? 'PASS' : 'FAIL'}  ${msg}`); if (!cond) failures++; };
 
@@ -17,8 +18,9 @@ console.log('Section counts:', Object.fromEntries(Object.entries(data.meta.sourc
 for (const s of ['react', 'zustand', 'tanstack-query']) check((data.meta.sources[s]?.sections ?? 0) > 0, `source ${s} has sections`);
 
 const client = new Client({ name: 'react-docs-smoke', version: '0.0.1' });
-// Start the server exactly as Cursor would: command/args from .mcp.json with ${CURSOR_PLUGIN_ROOT} resolved.
-const mcpCfg = JSON.parse(fs.readFileSync(path.join(ROOT, '.mcp.json'), 'utf8')).mcpServers['react-docs'];
+// Start the server exactly as Cursor would: command/args from mcp.json with ${CURSOR_PLUGIN_ROOT} resolved.
+console.log('plugin root:', ROOT);
+const mcpCfg = JSON.parse(fs.readFileSync(path.join(ROOT, 'mcp.json'), 'utf8')).mcpServers['react-docs'];
 const expand = (v) => v.replaceAll('${CURSOR_PLUGIN_ROOT}', ROOT);
 const spawnCfg = { command: expand(mcpCfg.command), args: (mcpCfg.args || []).map(expand), cwd: mcpCfg.cwd ? expand(mcpCfg.cwd) : undefined };
 console.log('server:', spawnCfg.command, spawnCfg.args.join(' '));

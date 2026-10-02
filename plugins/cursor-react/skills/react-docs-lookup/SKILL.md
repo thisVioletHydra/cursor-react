@@ -75,4 +75,4 @@ Fix every error and re-run until it reports "No issues found." Treat warnings (`
 
 ## Keeping docs fresh
 
-From the plugin folder, run `pnpm sync-docs`. It shallow-clones the upstream repos into `.cache/` and rewrites `data/docs.json`. Restart the MCP server afterwards (toggle it in Cursor settings).
+In a clone of https://github.com/thisVioletHydra/cursor-react, run `pnpm install && pnpm sync-docs` at the repo root. It shallow-clones the upstream repos into `.cache/` and rewrites `plugins/cursor-react/data/docs.json`. Restart the MCP server afterwards (toggle it in Cursor settings).

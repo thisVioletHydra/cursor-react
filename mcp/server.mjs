@@ -8,9 +8,13 @@ import { StdioServerTransport } from '@modelcontextprotocol/sdk/server/stdio.js'
 import { z } from 'zod';
 import { SearchIndex, SOURCE_ALIASES } from './search.mjs';
 
-// Works both as mcp/server.mjs (source) and dist/server.mjs (bundle): data/ is one level up.
-const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
-const DATA = process.env.REACT_DOCS_DATA || path.join(ROOT, 'data', 'docs.json');
+// Bundle: plugins/cursor-react/dist/server.mjs → ../data/docs.json (plugin root).
+// Source: mcp/server.mjs → ../plugins/cursor-react/data/docs.json (repo root).
+const HERE = path.dirname(fileURLToPath(import.meta.url));
+const DATA =
+  process.env.REACT_DOCS_DATA ||
+  [path.join(HERE, '..', 'data', 'docs.json'), path.join(HERE, '..', 'plugins', 'cursor-react', 'data', 'docs.json')].find((p) => fs.existsSync(p)) ||
+  path.join(HERE, '..', 'data', 'docs.json');
 
 function load() {
   if (!fs.existsSync(DATA)) return { meta: { sources: {} }, sections: [] };
