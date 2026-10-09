@@ -1,10 +1,10 @@
 # cursor-react
 
-A Cursor plugin marketplace repository. It contains one plugin, **`cursor-react`**, which provides:
+A plugin marketplace repository for Cursor and Codex. It contains one plugin, **`cursor-react`**, which provides:
 
 - a **local, self-contained** docs MCP server for react.dev, Zustand and TanStack Query
 - a React hooks / React Compiler linter
-- React 19 skills, rules and an agent
+- five shared skills for React, Zustand, documentation lookup, editing and data safety; Cursor rules and an agent
 
 The layout follows Cursor's official [plugin template](https://github.com/cursor/plugin-template): `.cursor-plugin/marketplace.json` at the repo root, and the plugin itself under `plugins/cursor-react/`.
 
@@ -45,6 +45,19 @@ Add this to `~/.cursor/mcp.json`, using an absolute path because `${CURSOR_PLUGI
   }
 }
 ```
+
+### Codex
+
+Add this GitHub marketplace in Codex Plugins, or run:
+
+```bash
+codex plugin marketplace add thisVioletHydra/cursor-react
+codex plugin add cursor-react@thisviolethydra
+```
+
+The repo includes `.agents/plugins/marketplace.json`; the plugin includes `.codex-plugin/plugin.json` and `.mcp.json`. Codex resolves the relative MCP working directory from the installed plugin root. Both hosts share the same bundled server, documentation and five skills. Cursor keeps its own `mcp.json`, rules and agent; Codex uses the editing skill for that workflow.
+
+To refresh an existing Git marketplace, run `codex plugin marketplace upgrade thisviolethydra`, then install/update the plugin and start a new chat. A repo marketplace update is separate from publication in OpenAI's public directory. Public submission of this local stdio MCP requires an HTTPS deployment or explicit local MCP support from OpenAI: https://developers.openai.com/plugins/build/plugins.
 
 ## Repository layout
 
@@ -93,3 +106,20 @@ The server looks for `data/docs.json` relative to its own file. Set `REACT_DOCS_
 ## License
 
 MIT © 2026 thisVioletHydra
+
+## Release 0.2.0
+
+- Refreshed official React, Zustand and TanStack Query snapshots; provenance lives in `data/docs.json` (`generatedAt` and per-source commit SHA).
+- Added Codex packaging and marketplace metadata; retained Cursor integration.
+- Added editing and data-safety skills, request isolation, persistence allowlists and stable Zustand v5 selectors.
+- Corrected Compiler guidance to require enabled compilation; API guidance checks project versions and experimental channels.
+
+Validate both host launch configurations before releasing:
+
+```bash
+pnpm build
+pnpm smoke
+pnpm smoke -- --codex
+```
+
+The lint tool runs locally on provided code. It is a hooks/Compiler diagnostic tool, not a security scanner. The documentation snapshot is frozen at release time and can include upstream experimental pages.

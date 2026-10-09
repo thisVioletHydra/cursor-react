@@ -1,0 +1,18 @@
+{
+  "name": "cursor-react",
+  "version": "0.2.0",
+  "description": "Official React, Zustand and TanStack Query docs; React best practices, data safety and local hooks/Compiler linting.",
+  "skills": "./skills/",
+  "mcpServers": "./.mcp.json",
+  "interface": {
+    "displayName": "React",
+    "shortDescription": "React best practices, Zustand, official docs and linting",
+    "longDescription": "Write and review React code using official documentation. Includes guidance for effects, Actions, React Compiler, Zustand selectors, SSR request isolation and sensitive data boundaries. Local MCP runs without sending code to an external service.",
+    "developerName": "thisVioletHydra",
+    "category": "Developer Tools",
+    "defaultPrompt": [
+      "Review React code for correctness, Zustand state design and data leaks.",
+      "Implement this React component using the bundled official documentation and best practices."
+    ]
+  }
+}

@@ -68,7 +68,7 @@ return <form action={formAction}>…</form>;
 
 ## `use(resource)`
 
-`use` reads a Promise or a context during render. It is **not a Hook**, so it can be called inside `if` and loops. It must still be called from a component or Hook, and **not inside try/catch**; use an Error Boundary for errors. [`react/reference/react/use#use-promise`]
+`use` reads a Promise or a context during render. Unlike other Hooks, it can be called inside `if` and loops. It must still be called from a component or Hook, and **not inside try/catch**; use an Error Boundary for errors. [`react/reference/react/use#use-promise`]
 
 ```jsx
 // 🔴 new Promise every render → Suspense fallback on every re-render
@@ -90,7 +90,7 @@ Keys must be **unique among siblings** and **stable**. Don't generate them durin
 
 ## Memoization and React Compiler
 
-React Compiler memoizes automatically at build time. For **new code**, rely on the compiler, and use `useMemo`/`useCallback` only as an escape hatch for precise control, for example a value used as an Effect dependency. For **existing code**, leave the current memoization alone, or test carefully before removing it: removal can change the compiled output. [`react/learn/react-compiler/introduction#what-should-i-do-about-usememo-usecallback-and-reactmemo`]
+React Compiler memoizes automatically at build time. First check that React Compiler is enabled in the build configuration. Without it, profile expensive computations and identity-sensitive consumers before adding memoization. For **new compiled code**, rely on the compiler, and use `useMemo`/`useCallback` only as an escape hatch for precise control, for example a value used as an Effect dependency. For **existing code**, leave the current memoization alone, or test carefully before removing it: removal can change the compiled output. [`react/learn/react-compiler/introduction#what-should-i-do-about-usememo-usecallback-and-reactmemo`]
 
 The compiler (and `lint-component`) expects code that follows the Rules of React:
 - render is pure: no `Math.random()`/`Date.now()` in render (`purity`)
@@ -123,6 +123,12 @@ export default async function Page() {
 
 1. Can this be computed during render instead of stored or synced? → compute it.
 2. Is this Effect reacting to a user event? → move it to the handler.
-3. Async mutations: use Actions (`useActionState`, `useOptimistic`, `<form action>`), not hand-rolled flags.
+3. Consider Actions for React form workflows. Preserve framework or TanStack Query mutation workflows that already own pending/error/cache state.
 4. Keys come from data. Memoize only with a measured reason.
 5. Run `lint-component` on the result.
+
+## Effect lifecycle and version checks
+
+Keep reactive dependencies; do not suppress exhaustive-deps to hide stale closures. Return cleanup for subscriptions, timers and connections. Abort or ignore obsolete fetch responses and handle failures; prefer framework loaders or server-state caching where available. Strict Mode exercises setup → cleanup → setup; cleanup must undo setup. https://react.dev/learn/synchronizing-with-effects
+
+Inspect the project React version and framework before proposing APIs. The snapshot follows upstream main and can include Canary/experimental APIs; verify the page channel before recommending them. Compiler lint diagnostics do not prove the compiler is enabled.

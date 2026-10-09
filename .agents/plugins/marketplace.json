@@ -1,0 +1,20 @@
+{
+  "name": "thisviolethydra",
+  "interface": {
+    "displayName": "React for Cursor and Codex"
+  },
+  "plugins": [
+    {
+      "name": "cursor-react",
+      "source": {
+        "source": "local",
+        "path": "./plugins/cursor-react"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_INSTALL"
+      },
+      "category": "Developer Tools"
+    }
+  ]
+}

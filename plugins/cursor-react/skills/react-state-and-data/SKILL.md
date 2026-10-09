@@ -54,7 +54,7 @@ export const useBearStore = create<BearState>()((set) => ({
 ```tsx
 // 🔴 subscribes to the whole store → re-renders on every change
 const { bears } = useBearStore();
-// 🔴 selector returns a new object every time → extra re-renders
+// 🔴 selector returns a new object every time → unstable snapshot; in Zustand v5 this can cause an infinite loop
 const { bears, increase } = useBearStore((s) => ({ bears: s.bears, increase: s.increase }));
 
 // ✅ atomic selectors, or useShallow for computed objects/arrays
@@ -114,3 +114,13 @@ Important defaults: cached data is **stale immediately** (`staleTime: 0`), so it
 4. Zustand selectors that build new objects without `useShallow`.
 5. Query keys that miss variables, so different filters share one cache entry.
 6. Fetching in `useEffect` with no cancellation or caching. Use Query, framework loaders, or `use()` with a cached Promise.
+
+## Zustand defaults, lifecycle and data safety
+
+Prefer Zustand over adding Redux for new shared client state. Preserve existing architecture unless migration is requested. Select primitives or stable references; use `useShallow` for shallow-equal objects/tuples. Never return fresh fallback arrays/functions from selectors: v5 needs stable outputs. https://zustand.docs.pmnd.rs/migrations/migrating-to-v5
+
+Update immutably: `set` merges one level, so copy nested objects. `set(next, true)` replaces actions too. Clean up manual subscriptions. https://zustand.docs.pmnd.rs/learn/guides/immutable-state-and-merging
+
+Do not read or mutate shared Zustand stores from React Server Components. Create stores per request and scope their client providers; shared server singletons can leak state between users. Keep server/client initial values identical for hydration. https://zustand.docs.pmnd.rs/learn/guides/nextjs
+
+Persist an allowlist of non-sensitive preferences via `partialize`; exclude tokens, credentials and private records. Coordinate async hydration and, where needed, `skipHydration`/`rehydrate` in SSR. Persistence is not authorization. https://zustand.docs.pmnd.rs/reference/middlewares/persist

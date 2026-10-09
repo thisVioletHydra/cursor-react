@@ -29,7 +29,7 @@ const resolveSource = (s) => (s ? SOURCE_ALIASES[s.toLowerCase()] || s : undefin
 const text = (t) => ({ content: [{ type: 'text', text: t }] });
 const noData = 'No docs data found. Run `pnpm sync-docs` in the plugin folder first.';
 
-const server = new McpServer({ name: 'react-docs', version: '0.1.0' });
+const server = new McpServer({ name: 'react-docs', version: '0.2.0' });
 
 server.registerTool(
   'list-sections',
@@ -85,7 +85,9 @@ server.registerTool(
     if (!db.sections.length) return text(noData);
     const out = [];
     for (const id of ids) {
-      let secs = byId.has(id) ? [byId.get(id)] : db.sections.filter((s) => `${s.source}/${s.file}` === id.replace(/#$/, ''));
+      const secs = id.includes('#') && byId.has(id)
+        ? [byId.get(id)]
+        : db.sections.filter((s) => `${s.source}/${s.file}` === id.replace(/#$/, ''));
       if (!secs.length) { out.push(`### ${id}\n(not found — use search-docs or list-sections to find valid ids)`); continue; }
       for (const s of secs) out.push(`### ${s.headingPath.join(' > ')}\nid: ${s.id}\nsource: ${s.source} | page: ${s.title} | url: ${s.url}\n\n${s.text}`);
     }

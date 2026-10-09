@@ -10,3 +10,7 @@ React plugin for Cursor:
 Source, docs sync and build tooling are in the repository root: https://github.com/thisVioletHydra/cursor-react
 
 MIT © 2026 thisVioletHydra
+
+## Codex support (0.2.0)
+
+Install `cursor-react@thisviolethydra` from the GitHub marketplace. Codex uses `.codex-plugin/plugin.json` and `.mcp.json`; Cursor uses `.cursor-plugin/plugin.json` and `mcp.json`. Shared skills include best practices, state/data, docs lookup, editing and data safety. The bundled MCP needs Node 20+ and no dependency installation. See the repository README for installation and refresh instructions.

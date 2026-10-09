@@ -20,9 +20,9 @@ for (const s of ['react', 'zustand', 'tanstack-query']) check((data.meta.sources
 const client = new Client({ name: 'react-docs-smoke', version: '0.0.1' });
 // Start the server exactly as Cursor would: command/args from mcp.json with ${CURSOR_PLUGIN_ROOT} resolved.
 console.log('plugin root:', ROOT);
-const mcpCfg = JSON.parse(fs.readFileSync(path.join(ROOT, 'mcp.json'), 'utf8')).mcpServers['react-docs'];
+const mcpCfg = JSON.parse(fs.readFileSync(path.join(ROOT, process.argv.includes('--codex') ? '.mcp.json' : 'mcp.json'), 'utf8')).mcpServers['react-docs'];
 const expand = (v) => v.replaceAll('${CURSOR_PLUGIN_ROOT}', ROOT);
-const spawnCfg = { command: expand(mcpCfg.command), args: (mcpCfg.args || []).map(expand), cwd: mcpCfg.cwd ? expand(mcpCfg.cwd) : undefined };
+const spawnCfg = { command: expand(mcpCfg.command), args: (mcpCfg.args || []).map(expand), cwd: mcpCfg.cwd ? path.resolve(ROOT, expand(mcpCfg.cwd)) : ROOT };
 console.log('server:', spawnCfg.command, spawnCfg.args.join(' '));
 await client.connect(new StdioClientTransport({ ...spawnCfg, stderr: 'inherit' }));
 
@@ -48,6 +48,9 @@ for (const [q, re] of Object.entries(expectations)) {
 
 const doc = await call('get-documentation', { ids: [firstId] });
 check(doc.content[0].text.length > 200 && !/not found/.test(doc.content[0].text), `get-documentation(${firstId}) returned ${doc.content[0].text.length} chars`);
+
+const page = await call('get-documentation', { ids: ['react/reference/react/useOptimistic'] });
+check(page.content[0].text.includes('react/reference/react/useOptimistic#'), 'page lookup includes child sections, not only the intro');
 
 const bad = `import { useState } from 'react';
 export function Counter({ enabled }: { enabled: boolean }) {

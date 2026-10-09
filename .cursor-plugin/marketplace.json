@@ -4,15 +4,15 @@
     "name": "thisVioletHydra"
   },
   "metadata": {
-    "description": "thisVioletHydra's Cursor plugins",
-    "version": "0.1.0"
+    "description": "React development plugins for Cursor and Codex",
+    "version": "0.2.0"
   },
   "plugins": [
     {
       "name": "cursor-react",
       "source": "./plugins/cursor-react",
       "description": "React 19 docs MCP (react.dev, Zustand, TanStack Query), React hooks/Compiler linter, and React skills.",
-      "version": "0.1.0"
+      "version": "0.2.0"
     }
   ]
 }

@@ -5,7 +5,7 @@ description: How and when to use the react-docs MCP tools (search-docs, list-sec
 
 # React Docs Lookup
 
-The `react-docs` MCP server serves a local, freshly synced copy of:
+The `react-docs` MCP server serves a local, versioned snapshot of:
 
 | source | upstream | ids look like |
 |---|---|---|
@@ -70,9 +70,13 @@ Fix every error and re-run until it reports "No issues found." Treat warnings (`
 ## Answering
 
 - Cite the react.dev / Zustand / TanStack URL returned with the section.
-- Prefer the docs' examples and wording over memory. If a doc and your memory disagree, the doc wins (it was synced from the latest default branch).
+- Prefer the docs' examples and wording over memory. Check the project version and Stable/Canary/Experimental channel; upstream main can document unreleased APIs.
 - If nothing relevant comes back, say so, and then answer from general knowledge with a caveat.
 
 ## Keeping docs fresh
 
-In a clone of https://github.com/thisVioletHydra/cursor-react, run `pnpm install && pnpm sync-docs` at the repo root. It shallow-clones the upstream repos into `.cache/` and rewrites `plugins/cursor-react/data/docs.json`. Restart the MCP server afterwards (toggle it in Cursor settings).
+In a clone of https://github.com/thisVioletHydra/cursor-react, run `pnpm install && pnpm sync-docs` at the repo root. It shallow-clones the upstream repos into `.cache/` and rewrites `plugins/cursor-react/data/docs.json`. Reload the MCP plugin in Cursor or Codex afterwards.
+
+## Cursor and Codex
+
+Use the MCP tool names exposed by the host (Codex may namespace them). If unavailable, consult bundled skills and `../../data/docs.json` relative to this skill directory, or official URLs. Disclose the fallback and any lint that did not run. Skills carry the shared workflow; Cursor rules and agents are optional integrations.
