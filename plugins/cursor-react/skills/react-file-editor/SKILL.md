@@ -13,3 +13,7 @@ description: Write or review React components and hooks using official docs, bes
 6. Report changes, actual checks and limitations. Disclose unavailable tools; never claim lint succeeded if it did not run.
 
 This skill provides the workflow in hosts without Cursor rules/agent support. Installation does not create a Codex subagent.
+
+## Readability conventions
+
+When writing or reviewing JSX/components, also read `../react-style-guide/SKILL.md`. Apply its naming, formatting and render-logic conventions to changed code; check readability even when hooks lint passes.

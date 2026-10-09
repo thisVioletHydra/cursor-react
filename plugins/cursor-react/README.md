@@ -14,3 +14,9 @@ MIT © 2026 thisVioletHydra
 ## Codex support (0.2.0)
 
 Install `cursor-react@thisviolethydra` from the GitHub marketplace. Codex uses `.codex-plugin/plugin.json` and `.mcp.json`; Cursor uses `.cursor-plugin/plugin.json` and `mcp.json`. Shared skills include best practices, state/data, docs lookup, editing and data safety. The bundled MCP needs Node 20+ and no dependency installation. See the repository README for installation and refresh instructions.
+
+## Release 0.2.1: readable React
+
+Adds `react-style-guide`, shared by Cursor and Codex and linked from editing/best-practices skills and Cursor rules/agent. Covers JSX formatting (100-column target), domain-based names, explicit render branches, focused components and named complex handlers. Existing project conventions take precedence. These are plugin conventions, not requirements from react.dev.
+
+MCP lint now reports nested ternaries as errors and unnecessary ternaries as warnings. It still allows short single ternaries and inline callbacks. Formatting/naming/component design are reviewed through the skill, not automatically enforced by ESLint. Updating the plugin does not rewrite existing application code; request a review/refactor to apply it.

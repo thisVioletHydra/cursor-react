@@ -82,6 +82,11 @@ export function Counter() {
 const ok = await call('lint-component', { code: good });
 check(ok.structuredContent.messages.length === 0, 'lint passes clean component');
 
+const nested = await call('lint-component', { code: 'export function Status({ pending, failed }) { return pending ? <span>Loading</span> : failed ? <span>Error</span> : <span>Ready</span>; }' });
+check(nested.structuredContent.messages.some((m) => m.rule === 'no-nested-ternary'), 'lint flags nested render ternary');
+const simple = await call('lint-component', { code: 'export function Status({ pending }) { return pending ? <span>Loading</span> : <span>Ready</span>; }' });
+check(simple.structuredContent.messages.length === 0, 'lint allows a simple render ternary');
+
 await client.close();
 console.log(failures ? `\n${failures} check(s) failed` : '\nAll smoke checks passed');
 process.exit(failures ? 1 : 0);

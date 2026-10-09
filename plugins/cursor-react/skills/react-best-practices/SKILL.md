@@ -132,3 +132,7 @@ export default async function Page() {
 Keep reactive dependencies; do not suppress exhaustive-deps to hide stale closures. Return cleanup for subscriptions, timers and connections. Abort or ignore obsolete fetch responses and handle failures; prefer framework loaders or server-state caching where available. Strict Mode exercises setup → cleanup → setup; cleanup must undo setup. https://react.dev/learn/synchronizing-with-effects
 
 Inspect the project React version and framework before proposing APIs. The snapshot follows upstream main and can include Canary/experimental APIs; verify the page channel before recommending them. Compiler lint diagnostics do not prove the compiler is enabled.
+
+## Readability conventions
+
+When writing or reviewing JSX/components, also read `../react-style-guide/SKILL.md`. Apply its naming, formatting and render-logic conventions to changed code; check readability even when hooks lint passes.

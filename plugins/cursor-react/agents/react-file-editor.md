@@ -62,3 +62,7 @@ After completing your work, provide:
 1. Summary of changes made
 2. Any issues found and fixed by the linter
 3. Recommendations for further improvements (if any)
+
+## Shared style guide
+
+For component naming, readable JSX, render branches and inline handlers, read `../skills/react-style-guide/SKILL.md` relative to this file. Avoid nested ternaries; use meaningful domain names and explicit branches. Follow project formatter settings and preserve behavior. These are plugin conventions, not official React requirements.

@@ -26,3 +26,7 @@ After searching, you MUST fetch ALL sections relevant to the user's task before 
 
 Lints React JS/TS/JSX/TSX with eslint-plugin-react-hooks (rules-of-hooks, exhaustive-deps and the React Compiler rules).
 You MUST call it on every component or hook you write before sending it to the user, and keep fixing until it reports no issues.
+
+## Shared style guide
+
+For component naming, readable JSX, render branches and inline handlers, read `../skills/react-style-guide/SKILL.md` relative to this file. Avoid nested ternaries; use meaningful domain names and explicit branches. Follow project formatter settings and preserve behavior. These are plugin conventions, not official React requirements.

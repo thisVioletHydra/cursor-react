@@ -29,7 +29,7 @@ const resolveSource = (s) => (s ? SOURCE_ALIASES[s.toLowerCase()] || s : undefin
 const text = (t) => ({ content: [{ type: 'text', text: t }] });
 const noData = 'No docs data found. Run `pnpm sync-docs` in the plugin folder first.';
 
-const server = new McpServer({ name: 'react-docs', version: '0.2.0' });
+const server = new McpServer({ name: 'react-docs', version: '0.2.1' });
 
 server.registerTool(
   'list-sections',
@@ -127,7 +127,7 @@ server.registerTool(
     description:
       'Lints React JS/TS/JSX/TSX code with ESLint + eslint-plugin-react-hooks recommended config ' +
       '(rules-of-hooks, exhaustive-deps and the React Compiler rules: purity, refs, set-state-in-effect, immutability, ...). ' +
-      'Use it on components/hooks you write and fix all reported problems.',
+      'Also checks nested and unnecessary ternaries. Use it on components/hooks you write and fix reported errors; review warnings.',
     inputSchema: {
       code: z.string().min(1),
       filename: z.string().optional().describe('Used to pick the dialect, default Component.tsx'),

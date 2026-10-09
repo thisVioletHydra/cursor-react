@@ -7,6 +7,8 @@ import reactHooks from 'eslint-plugin-react-hooks';
 
 const recommended = reactHooks.configs.flat?.['recommended-latest'] ?? reactHooks.configs['recommended-latest'] ?? reactHooks.configs.recommended;
 
+const rules = { ...recommended.rules, 'no-nested-ternary': 'error', 'no-unneeded-ternary': 'warn' };
+
 let eslint;
 function getEslint() {
   eslint ??= new ESLint({
@@ -22,7 +24,7 @@ function getEslint() {
           parserOptions: { ecmaFeatures: { jsx: true } },
         },
         plugins: { 'react-hooks': reactHooks },
-        rules: { ...recommended.rules },
+        rules,
       },
     ],
   });
@@ -39,4 +41,4 @@ export async function lintComponent(code, filename = 'Component.tsx') {
   }));
 }
 
-export const lintRules = Object.keys(recommended.rules);
+export const lintRules = Object.keys(rules);
