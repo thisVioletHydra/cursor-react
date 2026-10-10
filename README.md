@@ -151,3 +151,7 @@ Adds the shared `react-compiler` skill for React 19 applications with Compiler e
 The [10xHub guide](https://github.com/10xHub/react-style-guide/blob/main/docs/guidelines/REACT_GUIDE.md) was reviewed as community material, not imported into the official-docs index. Its PropTypes, routine memoization, lazy-inside-render and server-to-client callback examples are not adopted. Official react.dev guidance takes precedence; plugin naming/formatting conventions remain separate.
 
 This repository is a Node MCP plugin, not a React app. Installing it does not enable React Compiler in a consumer project. Verify the project's own build configuration and compiled output.
+
+## Versioning: 19.2.2
+
+Starting with 19.2.2 (formerly 0.2.2), the plugin version follows `<React major>.<plugin minor>.<plugin patch>`. The leading 19 identifies the React generation; the remaining numbers track plugin releases independently of React's minor/patch versions. This is a versioning change with the same functionality as 0.2.2.
