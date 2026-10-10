@@ -9,11 +9,11 @@ These are this plugin's readability conventions, not official React requirements
 
 ## JSX formatting
 
-- Use the project's formatter configuration. Without one, aim for Prettier-style formatting with `printWidth: 100`; this is a target, not a strict line-length limit.
-- Keep a simple element with one or two short props on one line when it fits. Do not expand every small element into a vertical block.
-- When an opening tag is too long or contains multiline values, put each prop on its own line and the closing `>` or `/>` on a separate line. Keep nested children indented.
-- For manually written SVG with at most six short attributes, a readable line up to 120 characters is acceptable. This is a plugin exception, not Prettier behavior; never fight the configured formatter or add prettier-ignore just for it.
-- Wrap long single conditional/logical expressions with clear indentation; follow the project's formatter for operator placement. Before wrapping, simplify complex logic. Line breaks do not repair nested ternaries.
+- Follow the project's formatter configuration. Do not introduce a plugin-specific line-length target or classify code as bad merely because a line is long.
+- Keep simple elements and short props compact when they are easy to scan. Do not expand every small element into a vertical block.
+- Split tags and prop values when their structure is difficult to read, especially multiline expressions or complex props. Let the configured formatter decide the exact layout; do not manually reflow code solely because it crosses a character count.
+- Keep readable SVG attributes together where the formatter allows it. Do not impose special attribute-count or width limits, or add prettier-ignore to fight the project's formatting.
+- Simplify complex conditional/logical expressions before adjusting line breaks. Judge named concepts, nesting and clarity rather than line length; line breaks do not repair nested ternaries.
 
 ## Conditions and render logic
 
@@ -64,7 +64,7 @@ Check changed code for nested ternaries, opaque compound conditions, generic fea
 
 `lint-component` checks nested/unnecessary ternaries as well as Hooks/Compiler diagnostics. Naming, component boundaries and formatting require review; a clean lint result does not prove the style guide was followed. Respect the user's verification preferences and do not run formatters without authorization.
 
-References: https://prettier.io/docs/options#print-width and https://eslint.org/docs/latest/rules/no-nested-ternary. Official React correctness guidance remains in `../react-best-practices/SKILL.md`.
+Reference: https://eslint.org/docs/latest/rules/no-nested-ternary. Official React correctness guidance remains in `../react-best-practices/SKILL.md`.
 
 ## React Compiler workflow
 

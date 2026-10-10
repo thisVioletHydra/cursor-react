@@ -1,6 +1,6 @@
 {
   "name": "cursor-react",
-  "version": "19.2.2",
+  "version": "19.2.3",
   "description": "Official React, Zustand and TanStack Query docs; React best practices, data safety and local hooks/Compiler linting.",
   "skills": "./skills/",
   "mcpServers": "./.mcp.json",

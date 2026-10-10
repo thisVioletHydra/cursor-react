@@ -5,14 +5,14 @@
   },
   "metadata": {
     "description": "React development plugins for Cursor and Codex",
-    "version": "19.2.2"
+    "version": "19.2.3"
   },
   "plugins": [
     {
       "name": "cursor-react",
       "source": "./plugins/cursor-react",
       "description": "React 19 docs MCP (react.dev, Zustand, TanStack Query), React hooks/Compiler linter, and React skills.",
-      "version": "19.2.2"
+      "version": "19.2.3"
     }
   ]
 }

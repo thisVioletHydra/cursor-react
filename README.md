@@ -140,7 +140,7 @@ The lint tool runs locally on provided code. It is a hooks/Compiler diagnostic t
 
 ## Release 0.2.1: readable React
 
-Adds `react-style-guide`, shared by Cursor and Codex and linked from editing/best-practices skills and Cursor rules/agent. Covers JSX formatting (100-column target), domain-based names, explicit render branches, focused components and named complex handlers. Existing project conventions take precedence. These are plugin conventions, not requirements from react.dev.
+Adds `react-style-guide`, shared by Cursor and Codex and linked from editing/best-practices skills and Cursor rules/agent. Covers JSX formatting (project formatter and readability), domain-based names, explicit render branches, focused components and named complex handlers. Existing project conventions take precedence. These are plugin conventions, not requirements from react.dev.
 
 MCP lint now reports nested ternaries as errors and unnecessary ternaries as warnings. It still allows short single ternaries and inline callbacks. Formatting/naming/component design are reviewed through the skill, not automatically enforced by ESLint. Updating the plugin does not rewrite existing application code; request a review/refactor to apply it.
 
@@ -155,3 +155,7 @@ This repository is a Node MCP plugin, not a React app. Installing it does not en
 ## Versioning: 19.2.2
 
 Starting with 19.2.2 (formerly 0.2.2), the plugin version follows `<React major>.<plugin minor>.<plugin patch>`. The leading 19 identifies the React generation; the remaining numbers track plugin releases independently of React's minor/patch versions. This is a versioning change with the same functionality as 0.2.2.
+
+## Release 19.2.3: formatting without width limits
+
+Removes plugin-specific line-width and SVG attribute-count limits. Follow the project's formatter and assess readability by structure, nesting and clarity; long lines alone are not a code-quality defect.

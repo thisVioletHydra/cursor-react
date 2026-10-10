@@ -1,7 +1,7 @@
 {
   "name": "cursor-react",
   "displayName": "React",
-  "version": "19.2.2",
+  "version": "19.2.3",
   "description": "A plugin for React development: local react.dev, Zustand and TanStack Query docs over MCP, a React hooks/Compiler linter, and React 19 skills.",
   "author": {
     "name": "thisVioletHydra"
