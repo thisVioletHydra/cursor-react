@@ -65,3 +65,7 @@ Check changed code for nested ternaries, opaque compound conditions, generic fea
 `lint-component` checks nested/unnecessary ternaries as well as Hooks/Compiler diagnostics. Naming, component boundaries and formatting require review; a clean lint result does not prove the style guide was followed. Respect the user's verification preferences and do not run formatters without authorization.
 
 References: https://prettier.io/docs/options#print-width and https://eslint.org/docs/latest/rules/no-nested-ternary. Official React correctness guidance remains in `../react-best-practices/SKILL.md`.
+
+## React Compiler workflow
+
+For React 19 with Compiler, also read `../react-compiler/SKILL.md`. Use plain pure components and handlers by default; avoid routine manual memoization. Compiler lint and actual compiled output are separate evidence.

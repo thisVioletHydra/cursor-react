@@ -29,7 +29,7 @@ const resolveSource = (s) => (s ? SOURCE_ALIASES[s.toLowerCase()] || s : undefin
 const text = (t) => ({ content: [{ type: 'text', text: t }] });
 const noData = 'No docs data found. Run `pnpm sync-docs` in the plugin folder first.';
 
-const server = new McpServer({ name: 'react-docs', version: '0.2.1' });
+const server = new McpServer({ name: 'react-docs', version: '0.2.2' });
 
 server.registerTool(
   'list-sections',

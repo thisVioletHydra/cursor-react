@@ -80,3 +80,7 @@ In a clone of https://github.com/thisVioletHydra/cursor-react, run `pnpm install
 ## Cursor and Codex
 
 Use the MCP tool names exposed by the host (Codex may namespace them). If unavailable, consult bundled skills and `../../data/docs.json` relative to this skill directory, or official URLs. Disclose the fallback and any lint that did not run. Skills carry the shared workflow; Cursor rules and agents are optional integrations.
+
+## React Compiler workflow
+
+For React 19 with Compiler, also read `../react-compiler/SKILL.md`. Use plain pure components and handlers by default; avoid routine manual memoization. Compiler lint and actual compiled output are separate evidence.

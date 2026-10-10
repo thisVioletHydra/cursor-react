@@ -3,7 +3,7 @@ name: react-best-practices
 description: Guidance on writing modern, correct React 19 code. Load this skill whenever in a React project and asked to write/edit or review a component or hook (.jsx/.tsx). Covers derived state vs Effects, Actions (useActionState, useOptimistic, form actions), use(), keys, memoization with React Compiler, and Server/Client Component boundaries.
 ---
 
-Facts below come from the synced react.dev docs. Look up details with the react-docs MCP (`search-docs`, then `get-documentation`); ids are shown in brackets.
+Use React 19 and enabled React Compiler as the baseline when confirmed by the user. For Compiler-specific work, read `../react-compiler/SKILL.md`. Facts below come from the synced react.dev docs. Look up details with the react-docs MCP (`search-docs`, then `get-documentation`); ids are shown in brackets.
 
 ## Don't use Effects for derived state
 
@@ -21,7 +21,7 @@ const fullName = firstName + ' ' + lastName;
 - To **reset all state when a prop changes**, pass a `key` (`<Profile key={userId} userId={userId} />`) and don't clear the state in an Effect. [`#resetting-all-state-when-a-prop-changes`]
 - Put **user-triggered logic** (POST requests, notifications, analytics for a click) in the event handler, not in an Effect that watches state. [`#sending-a-post-request`, `#sharing-logic-between-event-handlers`]
 - Use `useSyncExternalStore` for **external stores**, not an Effect plus state. [`#subscribing-to-an-external-store`]
-- Effects are for **synchronizing with external systems** (DOM APIs, sockets, timers). If an Effect needs the latest props without re-running, use `useEffectEvent`. Never call it during render, and never use it just to skip dependencies. [`react/reference/react/useEffectEvent`]
+- Effects are for **synchronizing with external systems** (DOM APIs, sockets, timers). If an Effect needs the latest props without re-running, use `useEffectEvent`. Call it only from Effects or other Effect Events, not render or ordinary event handlers; never use it just to skip dependencies. [`react/reference/react/useEffectEvent`]
 
 The linter rule `react-hooks/set-state-in-effect` flags synchronous `setState` inside an Effect.
 
@@ -136,3 +136,9 @@ Inspect the project React version and framework before proposing APIs. The snaps
 ## Readability conventions
 
 When writing or reviewing JSX/components, also read `../react-style-guide/SKILL.md`. Apply its naming, formatting and render-logic conventions to changed code; check readability even when hooks lint passes.
+
+## Current React 19 conventions
+
+Use typed props and parameter defaults instead of `propTypes` or function-component `defaultProps`. For new React 19-only function components, pass `ref` as a prop; do not introduce `forwardRef` unless supporting older consumers. Declare lazy components at module scope. Prefer function components, while allowing class-based Error Boundaries when needed. See `../react-compiler/SKILL.md` for details and official references.
+
+Prefer plain derived values and handlers in compiled code; do not routinely wrap new components with `memo`. Compiler does not make external-store selector outputs stable or remove the need for Effect cleanup.

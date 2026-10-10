@@ -4,7 +4,7 @@ A plugin marketplace repository for Cursor and Codex. It contains one plugin, **
 
 - a **local, self-contained** docs MCP server for react.dev, Zustand and TanStack Query
 - a React hooks / React Compiler linter
-- six shared skills for React, Zustand, documentation lookup, editing and data safety; Cursor rules and an agent
+- seven shared skills for React, Zustand, documentation lookup, editing and data safety; Cursor rules and an agent
 
 The layout follows Cursor's official [plugin template](https://github.com/cursor/plugin-template): `.cursor-plugin/marketplace.json` at the repo root, and the plugin itself under `plugins/cursor-react/`.
 
@@ -55,7 +55,7 @@ codex plugin marketplace add thisVioletHydra/cursor-react
 codex plugin add cursor-react@thisviolethydra
 ```
 
-The repo includes `.agents/plugins/marketplace.json`; the plugin includes `.codex-plugin/plugin.json` and `.mcp.json`. Codex resolves the relative MCP working directory from the installed plugin root. Both hosts share the same bundled server, documentation and six skills. Cursor keeps its own `mcp.json`, rules and agent; Codex uses the editing skill for that workflow.
+The repo includes `.agents/plugins/marketplace.json`; the plugin includes `.codex-plugin/plugin.json` and `.mcp.json`. Codex resolves the relative MCP working directory from the installed plugin root. Both hosts share the same bundled server, documentation and seven skills. Cursor keeps its own `mcp.json`, rules and agent; Codex uses the editing skill for that workflow.
 
 To refresh an existing Git marketplace, run `codex plugin marketplace upgrade thisviolethydra`, then install/update the plugin and start a new chat. A repo marketplace update is separate from publication in OpenAI's public directory. Public submission of this local stdio MCP requires an HTTPS deployment or explicit local MCP support from OpenAI: https://developers.openai.com/plugins/build/plugins.
 
@@ -69,7 +69,7 @@ cursor-react/
 │   ├── mcp.json                        # react-docs: node ${CURSOR_PLUGIN_ROOT}/dist/server.mjs
 │   ├── rules/react-mcp-tools.mdc
 │   ├── agents/react-file-editor.md
-│   ├── skills/{react-best-practices,react-state-and-data,react-docs-lookup}/SKILL.md
+│   ├── skills/<skill-name>/SKILL.md  # seven shared skills
 │   ├── dist/                           # committed esbuild bundle (server + lazy lint chunk + smoke test)
 │   ├── data/docs.json                  # generated docs index (committed)
 │   ├── README.md
@@ -143,3 +143,11 @@ The lint tool runs locally on provided code. It is a hooks/Compiler diagnostic t
 Adds `react-style-guide`, shared by Cursor and Codex and linked from editing/best-practices skills and Cursor rules/agent. Covers JSX formatting (100-column target), domain-based names, explicit render branches, focused components and named complex handlers. Existing project conventions take precedence. These are plugin conventions, not requirements from react.dev.
 
 MCP lint now reports nested ternaries as errors and unnecessary ternaries as warnings. It still allows short single ternaries and inline callbacks. Formatting/naming/component design are reviewed through the skill, not automatically enforced by ESLint. Updating the plugin does not rewrite existing application code; request a review/refactor to apply it.
+
+## Release 0.2.2: React 19 and Compiler
+
+Adds the shared `react-compiler` skill for React 19 applications with Compiler enabled: plain components/handlers by default, deliberate manual memoization, compilation verification and skipped-component debugging. Updates props/ref conventions, lazy declarations, Effect Event usage and transition guidance. TypeScript tooling remains on 6 pending the documented 7.1 evaluation.
+
+The [10xHub guide](https://github.com/10xHub/react-style-guide/blob/main/docs/guidelines/REACT_GUIDE.md) was reviewed as community material, not imported into the official-docs index. Its PropTypes, routine memoization, lazy-inside-render and server-to-client callback examples are not adopted. Official react.dev guidance takes precedence; plugin naming/formatting conventions remain separate.
+
+This repository is a Node MCP plugin, not a React app. Installing it does not enable React Compiler in a consumer project. Verify the project's own build configuration and compiled output.

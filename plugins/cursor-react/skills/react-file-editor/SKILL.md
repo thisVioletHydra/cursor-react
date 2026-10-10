@@ -17,3 +17,7 @@ This skill provides the workflow in hosts without Cursor rules/agent support. In
 ## Readability conventions
 
 When writing or reviewing JSX/components, also read `../react-style-guide/SKILL.md`. Apply its naming, formatting and render-logic conventions to changed code; check readability even when hooks lint passes.
+
+## React Compiler workflow
+
+For React 19 with Compiler, also read `../react-compiler/SKILL.md`. Use plain pure components and handlers by default; avoid routine manual memoization. Compiler lint and actual compiled output are separate evidence.

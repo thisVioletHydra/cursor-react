@@ -66,3 +66,7 @@ After completing your work, provide:
 ## Shared style guide
 
 For component naming, readable JSX, render branches and inline handlers, read `../skills/react-style-guide/SKILL.md` relative to this file. Avoid nested ternaries; use meaningful domain names and explicit branches. Follow project formatter settings and preserve behavior. These are plugin conventions, not official React requirements.
+
+## React 19 with Compiler
+
+Read `../skills/react-compiler/SKILL.md` for compiled React projects. Prefer plain pure components over routine useMemo/useCallback/memo; validate configuration and skipped compilation when relevant. Avoid outdated PropTypes and function defaultProps recipes.
