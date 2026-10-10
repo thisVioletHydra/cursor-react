@@ -91,6 +91,20 @@ cursor-react/
 
 Sources: `react` (reactjs/react.dev `src/content`), `zustand` (pmndrs/zustand `docs/`), `tanstack-query` (TanStack/query `docs/framework/react`).
 
+## TypeScript compatibility and upgrade plan
+
+The plugin stays on TypeScript 6 (`typescript: ^6.0.3`). Its local MCP linter uses `typescript-eslint` and the JavaScript compiler API; a faster native type checker alone is not a replacement for that integration.
+
+TypeScript 7.1 is the next upgrade evaluation target, not an automatic upgrade. Microsoft announced a new compiler API planned for 7.1; availability and compatibility must be checked when evaluating the release. See the [TypeScript 7.0 announcement](https://devblogs.microsoft.com/typescript/announcing-typescript-7-0/#running-side-by-side-with-typescript-60).
+
+Before moving to 7.1 or later:
+
+- Confirm a stable release and a compiler API supported by `typescript-eslint` and the other bundled tools.
+- Verify dependency compatibility and compare lint diagnostics for JSX/TSX, Hooks and ternary rules.
+- Rebuild the self-contained MCP bundle and pass the Cursor and Codex smoke checks.
+
+Until those checks pass, keep the plugin on TypeScript 6. This policy applies to the plugin's tooling, not to the TypeScript version used by projects consuming its skills.
+
 ## Development
 
 ```bash

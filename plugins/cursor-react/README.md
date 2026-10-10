@@ -20,3 +20,18 @@ Install `cursor-react@thisviolethydra` from the GitHub marketplace. Codex uses `
 Adds `react-style-guide`, shared by Cursor and Codex and linked from editing/best-practices skills and Cursor rules/agent. Covers JSX formatting (100-column target), domain-based names, explicit render branches, focused components and named complex handlers. Existing project conventions take precedence. These are plugin conventions, not requirements from react.dev.
 
 MCP lint now reports nested ternaries as errors and unnecessary ternaries as warnings. It still allows short single ternaries and inline callbacks. Formatting/naming/component design are reviewed through the skill, not automatically enforced by ESLint. Updating the plugin does not rewrite existing application code; request a review/refactor to apply it.
+
+## TypeScript compatibility and upgrade plan
+
+The plugin stays on TypeScript 6 (`typescript: ^6.0.3`). Its local MCP linter uses `typescript-eslint` and the JavaScript compiler API; a faster native type checker alone is not a replacement for that integration.
+
+TypeScript 7.1 is the next upgrade evaluation target, not an automatic upgrade. Microsoft announced a new compiler API planned for 7.1; availability and compatibility must be checked when evaluating the release. See the [TypeScript 7.0 announcement](https://devblogs.microsoft.com/typescript/announcing-typescript-7-0/#running-side-by-side-with-typescript-60).
+
+Before moving to 7.1 or later:
+
+- Confirm a stable release and a compiler API supported by `typescript-eslint` and the other bundled tools.
+- Verify dependency compatibility and compare lint diagnostics for JSX/TSX, Hooks and ternary rules.
+- Rebuild the self-contained MCP bundle and pass the Cursor and Codex smoke checks.
+
+Until those checks pass, keep the plugin on TypeScript 6. This policy applies to the plugin's tooling, not to the TypeScript version used by projects consuming its skills.
+
